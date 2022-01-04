@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+
+    android:background="@drawable/back3"
+    tools:context=".activitys.HomePageActivity">
+
+    <ImageView
+        android:id="@+id/HomeTV"
+        android:layout_width="390dp"
+        android:layout_height="150dp"
+        android:background="@drawable/budgethomepage"/>
+
+    <TextView
+        android:id="@+id/netProfit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/HomeTV"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:text="Total balance:"
+        android:textColor="@color/black"
+        android:textFontWeight="@integer/material_motion_duration_long_2"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/NetProfitValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_below="@+id/HomeTV"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="10dp"
+        android:text="" />
+
+    <Button
+        android:id="@+id/IncomeBtn"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/NetProfitValue"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#48A868"
+        android:text="Add"
+        android:textAllCaps="false" />#097CF3
+
+
+    <Button
+        android:id="@+id/viewBtn"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/NetProfitValue"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="20dp"
+        android:textAllCaps="false"
+        android:backgroundTint="#DDB422"
+
+        android:text="View" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/LastTrans"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/viewBtn"
+        android:layout_marginTop="10dp" />
+
+
+</RelativeLayout>

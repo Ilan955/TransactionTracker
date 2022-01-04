@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back3"
+    tools:context=".activitys.viewTrans">
+
+    <Button
+        android:id="@+id/btnClickDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#077AF3"
+        android:text="Choose date" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/userList"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_below="@id/btnClickDate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userList"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:text="Balance of this day:"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TotalBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userList"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="10dp"
+        android:text="No data has fetched"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TotalBalance"
+
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:text="Number of transactions"
+        android:textSize="22dp"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/totalcount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TotalBalance"
+        android:layout_marginLeft="260dp"
+        android:layout_marginTop="20dp"
+        android:text="No data has fetched"
+        android:textSize="22dp"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

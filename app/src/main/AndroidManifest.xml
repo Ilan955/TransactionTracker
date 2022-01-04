@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.firebaselogin">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission-sdk-23 android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FireBaseLogin">
+        <activity
+            android:name=".activitys.settingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.ViewingActivity"
+            android:exported="false" />
+
+        <service android:name=".service.ForeGroundServ" />
+
+        <activity
+            android:name=".activitys.viewTrans"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.IncomeOutcomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.HomePageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".activitys.LoginActivity">
+
+    <ImageView
+        android:id="@+id/imgV"
+        android:layout_width="105dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="100dp"
+        android:background="@drawable/expenselogin"/>
+
+    <TextView
+        android:id="@+id/titleLabelTv"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgV"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#01477E"
+        android:text="Login"
+        android:textColor="@color/black"
+        android:textFontWeight="@integer/material_motion_duration_medium_2"
+        android:textSize="32dp"
+        android:textStyle="bold" />
+
+    <!--Email-->
+   <com.google.android.material.textfield.TextInputLayout
+       android:id="@+id/emailTil"
+       android:layout_above="@id/passwordTil"
+       android:layout_marginBottom="10dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+    <!--Password-->
+    <EditText
+        android:id="@+id/emailET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="textEmailAddress"/>
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/passwordTil"
+        app:passwordToggleEnabled="true"
+        android:layout_centerInParent="true">
+
+        <EditText
+            android:id="@+id/passwordET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="Password"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passwordTil"
+        android:text="Always stay signed in" />
+
+    <Button
+        android:id="@+id/informationBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/passwordTil"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="10dp"
+
+        android:background="@drawable/ic_baseline_info_24"
+        android:backgroundTint="#01477E" />
+    <!--Login Button-->
+    <Button
+        android:id="@+id/LoginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkBox"
+        android:textAllCaps="false"
+        android:layout_marginTop="10dp"
+
+        android:text="Login" />
+
+    <!-- SignUp Button -->
+    <TextView
+        android:id="@+id/noAccount"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LoginButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Not a member yet? Register!"
+        android:textColor="@color/black"
+        android:textFontWeight="@integer/material_motion_duration_long_2"
+        android:textSize="18dp" />
+</RelativeLayout>

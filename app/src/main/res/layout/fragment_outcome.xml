@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.IncomeFragment">
+
+    <TextView
+        android:id="@+id/incomeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:text="New Expense"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textFontWeight="@integer/material_motion_duration_long_2"
+         />
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/incomeTV"
+        android:layout_marginLeft="290dp"
+        android:layout_marginTop="90dp"/>
+
+    <Button
+        android:id="@+id/DateET"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/incomeTV"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="#077AF3"
+        android:text="Chooose a date"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+    <EditText
+        android:id="@+id/AmountET"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/DateET"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:inputType="number"
+        android:hint="Enter amount" />
+
+    <EditText
+        android:layout_marginTop="50dp"
+        android:id="@+id/DescriptionET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/AmountET"
+        android:hint="Enter Description"
+        />
+
+    <Button
+        android:id="@+id/AddBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/DescriptionET"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Add"
+        android:backgroundTint="#FE3D00"
+        android:textAllCaps="false" />
+
+
+
+
+</RelativeLayout>

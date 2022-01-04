@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="Sign In Options"
+        >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="StayLoggedIn"
+            android:title="Always keep me signed in"
+            android:summary="The system automatically log of the user if this text box is unchecked after 15 minutes of inactivity"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Graph Settings"
+        >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="GraphPerYear"
+            android:title="Show graph per year"
+            android:summary="If this is disabled then the graph will show the income and  expenses by the month that has been chosen"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Application preferences">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="NotificationCheck"
+            android:title="Allow notifications" />
+        <CheckBoxPreference
+            android:key="Vibration"
+            android:summary="If this is disabled then every click that will be made on any of the buttons of the system will not have the vibration effect"
+            android:title="Vibration while clicking" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="About" >
+<Preference android:selectable="false"
+    app:persistent="false"
+    android:summary="Application Creators Ilan and Omri\nVersion:1.0\nDate of release 3.1.2022\nContact us on Linkedin for more information "/>
+    </PreferenceCategory>
+</PreferenceScreen>
