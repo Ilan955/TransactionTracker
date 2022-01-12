@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
@@ -37,6 +39,11 @@ class OutcomeFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     private lateinit var fireBaseAuth: FirebaseAuth
     lateinit var dbRef: DatabaseReference
     var isPickedDate: Boolean = false
+    lateinit var dateInp: Button
+    lateinit var Amount : EditText
+    lateinit var Description : EditText
+    lateinit var addBtn : Button
+    lateinit var translateAnimation: Animation
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -64,11 +71,15 @@ class OutcomeFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         fireBaseAuth = FirebaseAuth.getInstance()
 
 
-        var dateInp = view.findViewById(R.id.DateET) as Button
-        var Amount = view.findViewById(R.id.AmountET) as EditText
-        var Description = view.findViewById(R.id.DescriptionET) as EditText
-        var addBtn = view.findViewById(R.id.AddBtn) as Button
-
+         dateInp = view.findViewById(R.id.DateET)
+         Amount = view.findViewById(R.id.AmountET)
+         Description = view.findViewById(R.id.DescriptionET)
+         addBtn = view.findViewById(R.id.AddBtn)
+         translateAnimation = AnimationUtils.loadAnimation(context, R.anim.views_animation)
+        dateInp.visibility =View.INVISIBLE
+        Amount.visibility =View.INVISIBLE
+        Description.visibility =View.INVISIBLE
+        addBtn.visibility =View.INVISIBLE
 
         addBtn.setOnClickListener {
             if(isVibrate){
@@ -121,6 +132,13 @@ class OutcomeFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         }
     }
 
+    override fun onPause() {
+        dateInp.visibility =View.INVISIBLE
+        Amount.visibility =View.INVISIBLE
+        Description.visibility =View.INVISIBLE
+        addBtn.visibility =View.INVISIBLE
+        super.onPause()
+    }
     private fun getDateTimeCalander() {
         val cal: Calendar = Calendar.getInstance()
         day = cal.get(Calendar.DAY_OF_MONTH)
@@ -129,6 +147,17 @@ class OutcomeFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     }
     override fun onResume() {
         isVibrate= android.preference.PreferenceManager.getDefaultSharedPreferences(context).getBoolean("Vibration",false)
+        Log.i("Hello",Amount.toString())
+        if(Amount!=null){
+            dateInp.visibility =View.VISIBLE
+            Amount.visibility =View.VISIBLE
+            Description.visibility =View.VISIBLE
+            addBtn.visibility =View.VISIBLE
+        Amount.startAnimation(translateAnimation)
+        Description.startAnimation(translateAnimation)
+        addBtn.startAnimation(translateAnimation)
+        dateInp.startAnimation(translateAnimation)
+        }
         super.onResume()
     }
 

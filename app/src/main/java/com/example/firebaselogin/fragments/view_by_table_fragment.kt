@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.TextView
@@ -42,6 +44,8 @@ class view_by_table_fragment : Fragment(), DatePickerDialog.OnDateSetListener {
     lateinit var listOfTrans: ArrayList<IncomeClass>
     lateinit var adapter: recycAdapter
     var isVibrate = false
+    lateinit var translateAnimation: Animation
+    lateinit var btnChooseDate : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -54,13 +58,14 @@ class view_by_table_fragment : Fragment(), DatePickerDialog.OnDateSetListener {
         setHasOptionsMenu(true)
         val rv = view.findViewById(R.id.userList) as RecyclerView
 
-        val btnChooseDate = view.findViewById(R.id.btnClickDate) as Button
+         btnChooseDate = view.findViewById(R.id.btnClickDate) as Button
         val s = fireBaseAuth.currentUser?.email.toString()
         val beforeTheMark = s.split("@")
         val afterTheMark = beforeTheMark[1].split(".")
         totalInc = view.findViewById(R.id.TotalBalance) as TextView
         totalCount = view.findViewById(R.id.totalcount) as TextView
-
+        translateAnimation = AnimationUtils.loadAnimation(context, R.anim.views_animation)
+        btnChooseDate.visibility = View.INVISIBLE
         sp = PreferenceManager.getDefaultSharedPreferences(context)
         dbRef = FirebaseDatabase.getInstance().getReference()
             .child(beforeTheMark[0] + "@" + afterTheMark[0] + "/Transactions")
@@ -156,9 +161,16 @@ class view_by_table_fragment : Fragment(), DatePickerDialog.OnDateSetListener {
         year = cal.get(Calendar.YEAR)
     }
 
+    override fun onPause() {
+        btnChooseDate.visibility = View.INVISIBLE
+        super.onPause()
+    }
+
     override fun onResume() {
         isVibrate = android.preference.PreferenceManager.getDefaultSharedPreferences(context)
             .getBoolean("Vibration", false)
+        btnChooseDate.visibility = View.VISIBLE
+        btnChooseDate.startAnimation(translateAnimation)
         super.onResume()
     }
 

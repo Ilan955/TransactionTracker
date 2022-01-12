@@ -35,6 +35,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:backgroundTint="#077AF3"
+
         android:text="Choose a date"
         android:textAllCaps="false"
         android:textColor="@color/white" />

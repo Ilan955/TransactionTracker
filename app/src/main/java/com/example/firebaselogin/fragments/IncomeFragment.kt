@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
@@ -32,9 +34,14 @@ class IncomeFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     var savemonth = 0
     var saveyear = 0
     var isPickedDate: Boolean = false
-    var isVibrate=false
+    var isVibrate = false
     private lateinit var fireBaseAuth: FirebaseAuth
     lateinit var dbRef: DatabaseReference
+    lateinit var dateInp: Button
+    lateinit var Amount: EditText
+    lateinit var Description: EditText
+    lateinit var addBtn: Button
+    lateinit var translateAnimation: Animation
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,8 +52,8 @@ class IncomeFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         savedInstanceState: Bundle?
     ): View? {
 
-        actionBar= (activity as AppCompatActivity?)!!.supportActionBar!!
-        actionBar.title="New Operation"
+        actionBar = (activity as AppCompatActivity?)!!.supportActionBar!!
+        actionBar.title = "New Operation"
 
 
         // Inflate the layout for this fragment
@@ -55,7 +62,7 @@ class IncomeFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         saveday = dayOfMonth
-        savemonth = month+1
+        savemonth = month + 1
         saveyear = year
     }
 
@@ -64,15 +71,19 @@ class IncomeFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         super.onViewCreated(view, savedInstanceState)
 
         fireBaseAuth = FirebaseAuth.getInstance()
+        dateInp = view.findViewById(R.id.DateET)
+        Amount = view.findViewById(R.id.AmountET)
+        Description = view.findViewById(R.id.DescriptionET)
+        addBtn = view.findViewById(R.id.AddBtn)
+        translateAnimation = AnimationUtils.loadAnimation(context, R.anim.views_animation)
+        dateInp.visibility = View.INVISIBLE
+        Amount.visibility = View.INVISIBLE
+        Description.visibility = View.INVISIBLE
+        addBtn.visibility = View.INVISIBLE
 
-
-        var dateInp = view.findViewById(R.id.DateET) as Button
-        var Amount = view.findViewById(R.id.AmountET) as EditText
-        var Description = view.findViewById(R.id.DescriptionET) as EditText
-        var addBtn = view.findViewById(R.id.AddBtn) as Button
 
         addBtn.setOnClickListener {
-            if(isVibrate){
+            if (isVibrate) {
                 val vib = vibe()
                 context?.let { it1 -> vib.setVibration(it1) }
             }
@@ -131,9 +142,27 @@ class IncomeFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         year = cal.get(Calendar.YEAR)
     }
 
+    override fun onPause() {
+        dateInp.visibility = View.INVISIBLE
+        Amount.visibility = View.INVISIBLE
+        Description.visibility = View.INVISIBLE
+        addBtn.visibility = View.INVISIBLE
+        super.onPause()
+    }
 
     override fun onResume() {
-        isVibrate= android.preference.PreferenceManager.getDefaultSharedPreferences(context).getBoolean("Vibration",false)
+        isVibrate = android.preference.PreferenceManager.getDefaultSharedPreferences(context)
+            .getBoolean("Vibration", false)
+        if (Amount != null) {
+            dateInp.visibility = View.VISIBLE
+            Amount.visibility = View.VISIBLE
+            Description.visibility = View.VISIBLE
+            addBtn.visibility = View.VISIBLE
+            Amount.startAnimation(translateAnimation)
+            Description.startAnimation(translateAnimation)
+            addBtn.startAnimation(translateAnimation)
+            dateInp.startAnimation(translateAnimation)
+        }
         super.onResume()
     }
 
