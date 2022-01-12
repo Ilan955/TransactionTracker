@@ -43,7 +43,7 @@ class ForeGroundServ() : Service() {
         tread.start()
         var tr=NotifyThread(::NotificationUpdate)
         tr.start()
-        var lg = LogOutThread()
+        var lg = LogOutThread(this,fireBaseAuth)
         lg.start()
         return super.onStartCommand(intent, flags, startId)
     }
@@ -55,7 +55,6 @@ class ForeGroundServ() : Service() {
         var fbDb = dbRef
 
         override fun run() {
-            Log.i("Hello","Im in the run")
             var totalIncome = 0
             fbDb.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -71,15 +70,12 @@ class ForeGroundServ() : Service() {
                         }
                         var inte = Intent()
                         inte.setAction("Counter")
-                        Log.i("Hello","IM IN FB")
                         inte.putExtra("Counter",totalIncome.toString())
                         ctX.sendBroadcast(inte)
-
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Log.i("Hello", "Im cancelled")
                 }
 
             })
@@ -93,7 +89,6 @@ class ForeGroundServ() : Service() {
         var notUp=notUpdatte
         override fun run() {
             while(i<100){
-                Log.i("Hello","Im in the run")
                 var totalIncome = 0
                 i++
                 Thread.sleep(5000)
@@ -103,11 +98,18 @@ class ForeGroundServ() : Service() {
         }
     }
 
-    private class LogOutThread():Thread(){
+
+    // thread will run every 15 minutes, if the user is not signed in then the user will be automatically signed out.
+    private class LogOutThread(ctx:Context,fireBaseAuth: FirebaseAuth):Thread(){
+        var ctx=ctx
         val i=0
+        val firebaseAuth=fireBaseAuth
         override fun run() {
             while(i<100){
-                Thread.sleep(500)
+                Thread.sleep(900000)
+                var isLogged =  android.preference.PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean("StayLoggedIn",true)
+                if(!isLogged)
+                    firebaseAuth.signOut()
             }
 
         }

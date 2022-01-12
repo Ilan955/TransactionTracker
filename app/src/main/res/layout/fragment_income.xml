@@ -66,8 +66,8 @@
         android:layout_below="@id/DescriptionET"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:text="Add"
         android:backgroundTint="#48A868"
+        android:text="Add"
         android:textAllCaps="false" />
 
 
