@@ -2,6 +2,7 @@ package com.example.firebaselogin.adapters
 
 import android.content.Context
 import android.graphics.drawable.Animatable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,17 +10,27 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firebaselogin.IncomeClass
 import com.example.firebaselogin.R
+import com.example.firebaselogin.dialog.TransactionAppDialog
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
-class recycAdapter(var items: ArrayList<IncomeClass>) :
-    RecyclerView.Adapter<recycAdapter.transViewHolder>() {
+class recycAdapter(var items: ArrayList<IncomeClass>,fbAuth:FirebaseAuth?=null) :
+    RecyclerView.Adapter<recycAdapter.transViewHolder>(){
 
     lateinit var translateAnimation: Animation
     lateinit var ctx: Context
-
+    lateinit var itemView1: View
+    lateinit private var dbRererance: DatabaseReference
+    lateinit var keyNumber:String
+    private var fbAuth=fbAuth
+    lateinit var l:IncomeClass
     inner class transViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
@@ -29,21 +40,41 @@ class recycAdapter(var items: ArrayList<IncomeClass>) :
         var imageTrans = itemView.findViewById(R.id.imageTrans) as ImageView
         var mainCard = itemView.findViewById(R.id.mainView) as CardView
 
+        init{
+            itemView.setOnClickListener{
+                itemView1=itemView
+                val fragmentManager = (ctx as AppCompatActivity).supportFragmentManager
+                val logOutDialog = TransactionAppDialog("EditView",items[adapterPosition])
+                logOutDialog.isCancelable = false
+                logOutDialog.show(fragmentManager,"Edit")
+
+            }
+
+            itemView.setOnLongClickListener{
+                val fragmentManager = (ctx as AppCompatActivity).supportFragmentManager
+                val logOutDialog = TransactionAppDialog("removeUser",items[adapterPosition])
+                Log.i("Hello111",items[adapterPosition].toString())
+                logOutDialog.isCancelable = false
+                logOutDialog.show(fragmentManager,"Remove")
+                return@setOnLongClickListener true
+            }
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): transViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.trans, parent, false)
         ctx = parent.context
+        fbAuth= FirebaseAuth.getInstance()
         val inflater = LayoutInflater.from(ctx)
         val contactView = inflater.inflate(R.layout.trans, parent, false)
-
         return transViewHolder(contactView)
     }
 
     override fun onBindViewHolder(holder: transViewHolder, position: Int) {
 
         // get the value that is in the position
-        var l = items.get(position)
+         l = items.get(position)
         var dateOfTra = holder.dateOfTrans
         var nameOfTra = holder.nameOfTrans
         var amountOfTra = holder.amountOfTrans
@@ -74,5 +105,6 @@ class recycAdapter(var items: ArrayList<IncomeClass>) :
     override fun getItemCount(): Int {
         return items.size
     }
+
 
 }

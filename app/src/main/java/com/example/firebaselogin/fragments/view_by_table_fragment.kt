@@ -22,6 +22,7 @@ import com.example.firebaselogin.IncomeClass
 import com.example.firebaselogin.R
 import com.example.firebaselogin.adapters.recycAdapter
 import com.example.firebaselogin.utils.vibe
+import com.github.mikephil.charting.data.Entry
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.util.*
@@ -74,6 +75,7 @@ class view_by_table_fragment : Fragment(), DatePickerDialog.OnDateSetListener {
         rv.layoutManager = mLayoutManager
         listOfTrans = arrayListOf<IncomeClass>()
         //
+
         //rv.adapter = adapter
         adapter = recycAdapter(listOfTrans)
         rv.adapter = adapter
@@ -103,6 +105,7 @@ class view_by_table_fragment : Fragment(), DatePickerDialog.OnDateSetListener {
     ) {
         this.dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                listOfTrans.clear()
                 if (snapshot.exists()) {
                     var totalIncome = 0
                     var counter = 0
@@ -112,6 +115,7 @@ class view_by_table_fragment : Fragment(), DatePickerDialog.OnDateSetListener {
                         // if user date !=12
                         if (user != null) {
                             if (user.dateOfIncome!! == date) {
+                                user.key=userSnapshot.key.toString()
                                 listOfTrans.add(user)
                                 totalIncome += user.incomeAcmount!!.toInt()
                                 counter++

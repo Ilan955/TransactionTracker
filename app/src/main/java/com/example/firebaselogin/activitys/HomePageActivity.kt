@@ -85,10 +85,11 @@ class HomePageActivity : AppCompatActivity() {
                     listOfTrans.clear()
                     for (userSnapshot in snapshot.children.reversed()) {
                         val user = userSnapshot.getValue(IncomeClass::class.java)
-
+                        Log.i("Hello1",userSnapshot.key.toString())
                         // if user date !=12
                         if (user != null) {
                             if (counter < 4) {
+                                user.key=userSnapshot.key.toString()
                                 listOfTrans.add(user)
                                 counter++
                             }

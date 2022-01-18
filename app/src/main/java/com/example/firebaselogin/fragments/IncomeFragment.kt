@@ -106,13 +106,13 @@ class IncomeFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                 dbRef = FirebaseDatabase.getInstance().getReference()
                     .child(beforeTheMark[0] + "@" + afterTheMark[0] + "/Transactions")
 
+
                 var newIncome = IncomeClass(
                     fireBaseAuth.currentUser?.email!!,
                     incomeDesc,
                     incomeAmount,
-                    sendingDate
+                    sendingDate,
                 )
-                dbRef.push().setValue(newIncome)
                 Toast.makeText(
                     context,
                     "Succeed enter the new income to your account ",
